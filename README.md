@@ -1,3 +1,3 @@
-# evosus_interview_project
+# EVOSUS Interview Project
 
 A project built for the EVOSUS interview process
