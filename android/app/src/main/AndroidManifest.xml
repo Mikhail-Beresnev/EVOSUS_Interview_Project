@@ -1,7 +1,6 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.evosus_interview_project">
-   <application
-        android:label="evosus_interview_project"
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    <application
+        android:label="testing"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

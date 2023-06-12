@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
           // select the theme color
           colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
         ),
-        home: MyHomePage(),
+        home: const MyHomePage(),
       ),
     );
   }
@@ -55,6 +55,8 @@ class MyAppState extends ChangeNotifier {
 }
 
 class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key});
+
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
@@ -69,11 +71,11 @@ class _MyHomePageState extends State<MyHomePage> {
     switch (selectedIndex) {
       // home page
       case 0:
-        page = GeneratorPage();
+        page = const GeneratorPage();
         break;
       // favorites page
       case 1:
-        page = FavoritesPage();
+        page = const FavoritesPage();
         break;
       // error
       default:
@@ -86,22 +88,22 @@ class _MyHomePageState extends State<MyHomePage> {
             SafeArea(
               child: NavigationRail(
                 backgroundColor: Colors.black,
-                extended: constraints.maxWidth >= 600,
+                extended: constraints.maxWidth <= 200,
                 leading: Container(
                   color: Colors.white,
-                  width: 260,
+                  // logo is deliberatly slightly smaller than the navigator
+                  // this is to not blend in with the main page
+                  width: 78,
                   child: Padding(
                     padding: const EdgeInsets.all(8.0),
                     // load the logo
                     child: Image.asset(
-                      '../assets/evosus_logo_sm.png',
-                      height: 17.72,
-                      width: 100,
+                      'assets/evosus_logo_sm.png',
                       fit: BoxFit.contain,
                     ),
                   ),
                 ),
-                destinations: [
+                destinations: const [
                   // home page icon navigation
                   NavigationRailDestination(
                     icon: Icon(Icons.home, color: Colors.orange),
@@ -153,16 +155,25 @@ Future buildFavoriteView(BuildContext context) async {
 
   // if the page is emtpy, return an empty message
   if (appState.favorites.isEmpty) {
-    return Center(
+    return const Center(
       child: Text('No favorites yet.'),
     );
   }
 
   // create a list of children to put into ListView to return
   List<Widget> listViewChildren = [
+    // instructions
+    const Padding(
+      padding: EdgeInsets.all(
+        10,
+      ),
+      child: Text("Hover or hold on the word to get it's meanings",
+          style: TextStyle(fontSize: 11)),
+    ),
+
     // header
     Padding(
-      padding: const EdgeInsets.all(20),
+      padding: const EdgeInsets.all(10),
       child: Text('You have '
           '${appState.favorites.length} favorites:'),
     ),
@@ -183,7 +194,7 @@ Future buildFavoriteView(BuildContext context) async {
     // generate a ListTile
     listViewChildren.add(
       ListTile(
-        leading: Icon(Icons.hot_tub),
+        leading: const Icon(Icons.hot_tub),
         title: Tooltip(
           message: '$definition1' '  +  ' '$definition2',
           child: Text(pair.asLowerCase),
@@ -198,6 +209,8 @@ Future buildFavoriteView(BuildContext context) async {
 }
 
 class FavoritesPage extends StatefulWidget {
+  const FavoritesPage({super.key});
+
   @override
   State<FavoritesPage> createState() => _FavoritesPageState();
 }
@@ -227,6 +240,8 @@ FutureBuilder favoriteView(BuildContext context) {
 }
 
 class GeneratorPage extends StatelessWidget {
+  const GeneratorPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     // watch the context for updates to refresh the state
@@ -247,7 +262,7 @@ class GeneratorPage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           BigCard(pair: pair),
-          SizedBox(height: 10),
+          const SizedBox(height: 10),
           Row(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -260,26 +275,26 @@ class GeneratorPage extends StatelessWidget {
                   icon,
                   color: Colors.white,
                 ),
-                label: Text(
+                label: const Text(
                   'Like',
                   style: TextStyle(color: Colors.white),
                 ),
                 style: ElevatedButton.styleFrom(
-                  textStyle: TextStyle(color: Colors.white),
+                  textStyle: const TextStyle(color: Colors.white),
                   backgroundColor: Colors.orange,
                 ),
               ),
-              SizedBox(width: 10),
+              const SizedBox(width: 10),
               // Next button
               ElevatedButton(
                 onPressed: () {
                   appState.getNext();
                 },
                 style: ElevatedButton.styleFrom(
-                  textStyle: TextStyle(color: Colors.white),
+                  textStyle: const TextStyle(color: Colors.white),
                   backgroundColor: Colors.orange,
                 ),
-                child: Text(
+                child: const Text(
                   'Next',
                   style: TextStyle(color: Colors.white),
                 ),
@@ -308,7 +323,7 @@ class BigCard extends StatelessWidget {
       color: Colors.white,
     );
     return Card(
-      color: Color.fromRGBO(79, 75, 75, 1),
+      color: const Color.fromRGBO(79, 75, 75, 1),
       child: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Text(
